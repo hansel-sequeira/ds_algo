@@ -1,8 +1,8 @@
-/*1) when do you use it? -> if the input array is sorted (not always the case!)
+/*
+1) when do you use it? -> if the input array is sorted (not always the case!)
 2) a better way to rephrase point 1 is if we have a confined search space and it is monotonic in nature (increasing / decreasing).
 
 Given a sorted array of integers, check if a value x exists in the array or not. If it does exist, return the index, else return -1
-	
 */
 
 
