@@ -67,3 +67,16 @@ vector<int> searchRange(vector<int>& arr, int target) {
         vector<int> res = {first, last};
         return res;
     }
+
+
+//cleaner code making use of binary_search(). If elt is not present, obviously -1,-1 to be returned, eliminating the need of additional checks on lb() and ub().
+vector<int> searchRange(vector<int>& arr, int target) {
+        int n = arr.size();
+        if(binary_search(arr.begin(), arr.end(), target) == false){
+            return {-1,-1};
+        }
+        int first = lower_bound(arr.begin(), arr.end(), target) - arr.begin();
+        int last = upper_bound(arr.begin(), arr.end(), target) - arr.begin() - 1;
+        vector<int> res = {first, last};
+        return res;
+    }
