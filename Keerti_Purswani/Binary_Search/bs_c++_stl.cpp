@@ -27,3 +27,6 @@ int res = lower_bound(arr, arr+n, 5) - arr; //returns 4
 vector<int> arr = {1,1,2,3,3};
 cout<<lower_bound(arr.begin(), arr.end(), 1) - arr.begin(); //returns 0
 cout<<upper_bound(arr.begin(), arr.end(), 1) - arr.begin(); //returns 2
+
+vector<int> arr = {};
+cout<<upper_bound(arr, arr+n, 10) - arr; //returns 0 (n)
