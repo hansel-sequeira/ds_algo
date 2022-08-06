@@ -21,3 +21,14 @@ int binary_search(vector<int>& arr, int x){
 	}
 	return -1;
 }
+
+/*
+Time complexity: O(logn)
+
+intuition: on every iteration of the loop, we're basically reducing our search space by half. Hence, the logn tc.
+Mathematical intution:
+search space: n -> n/2 -> n/4 ... 1
+n/2^0 -> n/2^1 -> n/2^2 -> n/2^k where n/2^k = 1
+or n = 2^k or k = log n base 2 and k is the total number of iterations
+Hence, TC is log(2) n
+*/
