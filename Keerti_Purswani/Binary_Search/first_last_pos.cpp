@@ -60,10 +60,10 @@ TC: linear scan O(n)
 vector<int> searchRange(vector<int>& arr, int target) {
         int n = arr.size();
         int first = lower_bound(arr.begin(), arr.end(), target) - arr.begin();
-        if(first == n || arr[first] != target) first = -1;
+        if(first == n || arr[first] != target) first = -1; //first == n handles elt not present (and greater than all elts in array) & also n = 0 condtn
         int last = upper_bound(arr.begin(), arr.end(), target) - arr.begin();
-        if(last == 0 || arr[last-1] != target) last = -1;
-        else last--;
+        if(last == 0 || arr[last-1] != target) last = -1; //last = 0 handles elt not present (smaller than all elts in array) & n = 0 condtn
+        else last--; // DO NOT FORGET THIS LINE!
         vector<int> res = {first, last};
         return res;
     }
