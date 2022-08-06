@@ -54,3 +54,16 @@ TC: linear scan O(n)
         vector<int> res = {first, last};
         return res;
     }
+
+
+//using c++ stl functions lower_bound() and upper_bound():
+vector<int> searchRange(vector<int>& arr, int target) {
+        int n = arr.size();
+        int first = lower_bound(arr.begin(), arr.end(), target) - arr.begin();
+        if(first == n || arr[first] != target) first = -1;
+        int last = upper_bound(arr.begin(), arr.end(), target) - arr.begin();
+        if(last == 0 || arr[last-1] != target) last = -1;
+        else last--;
+        vector<int> res = {first, last};
+        return res;
+    }
