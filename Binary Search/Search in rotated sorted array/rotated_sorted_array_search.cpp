@@ -6,6 +6,9 @@ For example, [0,1,2,4,5,6,7] might be rotated at pivot index 3 and become [4,5,6
 Given the array nums after the possible rotation and an integer target, return the index of target if it is in nums, or -1 if it is not in nums.
 */
 
+//intuition: pick any random point in the array. It is a GUARANTEE, that either the left or right portion is sorted. If tgt is within the bounds of the sorted part,
+//obviously search space is confined to the sorted part, else keep probing over the discrepant part.
+
     int binary_search(vector<int>& arr, int x, int low, int high){
         while(low<=high){
             int mid = low+(high-low)/2;
