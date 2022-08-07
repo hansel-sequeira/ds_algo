@@ -5,6 +5,11 @@ You may imagine that nums[-1] = nums[n] = -∞. In other words, an element is al
 You must write an algorithm that runs in O(log n) time.
 */
 
+//This 'peak' element is also called 'bitonic element'.
+//Variation: find element in bitonic array. Approach: Find index of bitonic element and then apply BS twice (on lhs and rhs)
+//WHY BS IS DONE TWICE? -2 -1 3 5 9 6 4 0 -3.        Here bitonic elt is 9 and to find for 0. 0 fits in bounds of lhs and rhs. ambiguous!
+//remember bs done on rhs is for descending sorted array!
+
 //visualize a valley with peaks and troughs. 
 
 int findPeakElement(vector<int>& nums) {
