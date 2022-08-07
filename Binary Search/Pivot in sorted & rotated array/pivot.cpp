@@ -38,8 +38,13 @@ int findMin(vector<int>& nums) {
                     //iteration 3: 1>2 -> {1} and then terminate!
                 low = mid+1;
             } else { //right part is sorted. pivot is in the left
-                high = mid;
+                high = mid; //keep pushing to the left
             }
         }
         return nums[low];
     }
+
+
+//a better way to remember this problem is consider a sorted array: [1,2,3]
+//iteration 1: 2<3 -> {1,2}
+//iteration 2: 1<2 -> {1} and terminate!
