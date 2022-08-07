@@ -20,3 +20,19 @@ int findMin(vector<int>& nums) {
         }
         return res;
     }
+
+//standard approach: 
+
+int findMin(vector<int>& nums) {
+        int n = nums.size();
+        int low = 0, high = n-1, res = -1;
+        while(low<high){
+            int mid = low+(high-low)/2;
+            if(nums[mid]>nums[high]){ //left part is sorted, pivot HAS to be in the right
+                low = mid+1;
+            } else { //right part is sorted. pivot is in the left
+                high = mid;
+            }
+        }
+        return nums[left];
+    }
