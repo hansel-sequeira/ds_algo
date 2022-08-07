@@ -5,7 +5,7 @@ You may imagine that nums[-1] = nums[n] = -∞. In other words, an element is al
 You must write an algorithm that runs in O(log n) time.
 */
 
-//visualize a valley with peaks and troughs. first & last elt will always be a peak.
+//visualize a valley with peaks and troughs. 
 
 int findPeakElement(vector<int>& nums) {
         int n = nums.size();
