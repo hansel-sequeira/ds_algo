@@ -1,6 +1,6 @@
 /*
-[4,5,6,7,0,1,2] -> pivot is 0
-Variations of this question: 
+[4,5,6,7,0,1,2] -> pivot is 0               NOTE: THE ELEMENTS ARE UNIQUE, ELSE CAN'T FIND!
+Variations of this question:  
 1) find pivot (element or index)
 2) find clockwise operations done (0,1,2 -> giving a total of 3)
 3) find anticlockwise operations done (4,5,6,7 -> a total of 4)
