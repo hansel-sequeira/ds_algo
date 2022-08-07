@@ -39,3 +39,25 @@ Given the array nums after the possible rotation and an integer target, return t
         }
         return -1;
     }
+
+
+//even more succinct code:
+
+int search(vector<int>& nums, int target) {
+        int low = 0, high = nums.size()-1;
+        while(low<=high){
+            int mid = low+(high-low)/2;
+            if(nums[mid] == target) return mid;
+            //check if left part is sorted
+            if(nums[low] <= nums[mid]){
+                if(target>=nums[low] and target<=nums[mid])
+                    return binary_search(nums, target, low, mid);
+                else low = mid+1; //else go to the right part
+            } else{ //else right part is sorted
+                if(mid+1<=high and target>=nums[mid+1] and target<=nums[high])
+                    return binary_search(nums, target, mid+1, high);
+                else high = mid-1; //else go to the left part
+            } 
+        }
+        return -1;
+    }
