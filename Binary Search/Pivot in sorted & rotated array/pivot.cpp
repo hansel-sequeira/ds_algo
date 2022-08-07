@@ -24,11 +24,18 @@ int findMin(vector<int>& nums) {
 //standard approach: 
 
 int findMin(vector<int>& nums) {
+        //arr[] = {4,5,6,7,1,2,3}
         int n = nums.size();
         int low = 0, high = n-1;
-        while(low<high){
+        while(low<high){ //STOP AND CONSIDER: if low==high, what then?? WHY BOTHER? So, terminate!
             int mid = low+(high-low)/2;
             if(nums[mid]>nums[high]){ //left part is sorted, pivot HAS to be in the right
+                    //STOP AND CONSIDER: why compare with the right and not the left??
+                    //assuming we compared with the left: iteration 1: 7>4 -> {1,2,3}
+                    //iteration 2: 2>1 -> {3} WRONG!!    We get the wrong answer when our search space is perfectly sorted
+                    //now comparing with right part: iteration 1: 7>3 -> {1,2,3}
+                    //iteration 2: 2>3 -> {1,2}
+                    //iteration 3: 1>2 -> {1} and then terminate!
                 low = mid+1;
             } else { //right part is sorted. pivot is in the left
                 high = mid;
