@@ -57,6 +57,7 @@ int findMin(vector<int>& nums) {
         int low = 0, high = n-1, res = nums[0];
         while(low<=high){
             int mid = low+(high-low)/2;
+            //array could be rotates 1-n times. if rotated n times, you've a fully sorted array
             if(nums[low]<=nums[high]) return min(res, nums[low]); //if you're in a sorted space, return.  (3,4,1,2,3) -> min() is necessary.
             if(nums[mid]<=nums[high]) {
                 res = nums[mid];
