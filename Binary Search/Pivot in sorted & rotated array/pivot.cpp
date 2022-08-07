@@ -48,3 +48,20 @@ int findMin(vector<int>& nums) {
 //a better way to remember this problem is consider a sorted array: [1,2,3]
 //iteration 1: 2<3 -> {1,2}
 //iteration 2: 1<2 -> {1} and terminate!
+
+
+
+//intuitive approach: 
+int findMin(vector<int>& nums) {
+        int n = nums.size();
+        int low = 0, high = n-1, res = nums[0];
+        while(low<=high){
+            int mid = low+(high-low)/2;
+            if(nums[low]<=nums[high]) return min(res, nums[low]); //if you're in a sorted space, return.  (3,4,1,2,3) -> min() is necessary.
+            if(nums[mid]<=nums[high]) {
+                res = nums[mid];
+                high = mid-1;
+            } else low = mid+1;
+        }
+        return res;
+    }
