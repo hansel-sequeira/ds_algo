@@ -1,8 +1,9 @@
 double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
         int n1 = nums1.size(), n2 = nums2.size();
         if(n2 < n1) return findMedianSortedArrays(nums2, nums1); //This line is necessary only if you want tc to be O(log(min(m,n))
-        //if(n2 < (n1+n2+1)/2) low = (n1+n2+1)/2 - n2;
-        //if(n1 > (n1+n2+1)/2) high = (n1+n2+1)/2;
+        //int k = (n1+n2+1)/2;     Relate this problem to finding the kth element among 2 sorted arrays
+        //if(n2 < k) low = k - n2;
+        //if(n1 > k) high = k;
         int low = 0, high = n1;
         while(low<=high){
             int cut1 = low+(high-low)/2;
