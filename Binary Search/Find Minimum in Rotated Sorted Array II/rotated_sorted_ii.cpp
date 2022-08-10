@@ -37,9 +37,7 @@ int findMin(vector<int>& nums) {
                 //So there is this ambiguity when it comes to nums[mid] = nums[high].
                 //The only solution for this is to basically decrement high ptr to have the condition where 
                 //nums[new_ptr] < or > nums[mid]
-                if(high>0 and nums[high] < nums[high-1]) return nums[high];
-                //1 1 1 2 1 1    -> the above condition is a MUST to return the actual pivot at index 4
-                else high--;
+                high--;
             }
         }
         return nums[low];
