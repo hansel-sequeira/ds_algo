@@ -71,3 +71,22 @@ bool isPossible(vector<int> arr, int bouquets, int k, int max_days){
         }
         return res;
     }
+
+
+//Simplified and elegant logic for isPossible():
+
+ bool isPossible(vector<int> arr, int bouquets, int k, int max_days){
+        int n = arr.size(), flow = 0, poss_bouquets = 0;
+        for(int i=0;i<n;i++){
+            if(arr[i] > max_days){
+                flow = 0;
+                continue;
+            }
+            flow++;
+            if(flow == k){
+                flow = 0;
+                poss_bouquets++;
+            }
+        }
+        return poss_bouquets >= bouquets;
+    }    
