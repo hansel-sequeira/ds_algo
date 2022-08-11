@@ -42,3 +42,24 @@ Output: 0
         }
         return res;
     }
+
+
+
+//LINEAR SOLUTION USING SLIDING WINDOW:
+
+
+int minSubArrayLen(int target, vector<int>& nums) {
+        int n = nums.size();
+        int low = 0, high = 0, sum = 0;
+        int res = INT_MAX;
+        while(high < n){
+            while(high<n and sum < target){
+                sum+= nums[high++];
+            }
+            while(low<=high and sum>=target){
+                res = min(res, high-low);
+                sum -= nums[low++];   
+            }
+        }
+        return res == INT_MAX ? 0 : res;
+    }
