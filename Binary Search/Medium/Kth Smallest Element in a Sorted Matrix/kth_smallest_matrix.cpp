@@ -42,3 +42,20 @@ int count(vector<vector<int>>& matrix, int target){
         }
         return res;
     }
+
+
+//time complexity: (n*n*logn)logD where D is the max difference between the greatest and smallest elt in the matrix.
+//Not the most efficient! We need to reduce the n*n*logn factor to n! How? make use of the fact that the matrix is sorted in the row and column order
+
+//improved logic: 
+
+int count(vector<vector<int>>& matrix, int target){
+        int vals = 0, n = matrix.size(), j = n-1;
+        for(int i=0;i<n;i++){
+            while(j>=0 and matrix[i][j]>target) j--;
+            vals += (j+1);
+        }
+        return vals;
+    }
+
+//time complexity now: O(2n)*logD  ===> nlogD
