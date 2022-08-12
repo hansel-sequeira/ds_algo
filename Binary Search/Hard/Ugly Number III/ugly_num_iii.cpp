@@ -36,6 +36,13 @@ public:
     SO ASSUMING [1 .. M .. 2M .. 5M ...x] and x<6M is our range. Then x/lcm(a,b) will be giving us 5 -> 5 nums div by both a and b.
     gcd is simply the greatest number that can divide both a and b.
     */
+  
+  
+    //lcm using __gcd():
+    ll lcm(ll a, ll b){
+        if(a>b) return lcm(b,a);
+        return a*(b/__gcd(a,b));
+    }
     
     ll gcd(ll a, ll b){
         if(a == 0) return b;
