@@ -25,3 +25,18 @@ int findPeakElement(vector<int>& nums) {
     }
 
 //the above code handles for n=1 and n=2;
+
+
+//even more succinct code:
+
+int findPeakElement(vector<int>& nums) {
+        int n = nums.size();
+        int low = 0, high = n-1;
+        while(low<high){
+            int mid = low+(high-low)/2;
+            if(mid==n-1 || nums[mid] > nums[mid+1]) high = mid;
+            else low = mid+1; //careful here! it should be low = mid+1 and NOT low = mid;
+            //take : [2,10] for eg. low = 0. now definitely move search space to the right.
+        }
+        return low;
+    }
