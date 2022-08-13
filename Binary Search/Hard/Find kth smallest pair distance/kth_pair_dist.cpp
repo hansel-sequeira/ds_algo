@@ -47,3 +47,14 @@ int count_occ(vector<int>& arr, int target){
     }
 
 //Bottleneck in the above approach is in count_occ whose tc is n^2. Total tc here is: O(n*n*log(max diff bn any two elts in the array))
+
+//Optimized fn to find no of pairs whose abs diff <= target in O(n) time.
+int count_occ(vector<int>& arr, int target){
+        int res = 0, right = 0;
+        for(int i=0;i<arr.size();i++){
+            while(right < arr.size() and arr[right]-arr[i]<=target)
+                right++;
+            if(right != i) res += (right-i-1);
+        }
+        return res;
+    }
