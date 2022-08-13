@@ -33,7 +33,11 @@ int count(vector<int>& arr, double target){
     }
     
     vector<int> kthSmallestPrimeFraction(vector<int>& arr, int k) {
-        double low = 0, high = 1, n = arr.size();
+        double low = INT_MAX, high = INT_MIN, n = arr.size();
+        for(int i=0;i<n-1;i++){
+            low = min(low, (double)arr[i]/arr[n-1]);
+            high = max(high, (double)arr[i]/arr[i+1]);
+        }
         while(high-low>1e-10){
             double mid = low+(high-low)/2.0;
             if(count(arr, mid) >= k){
