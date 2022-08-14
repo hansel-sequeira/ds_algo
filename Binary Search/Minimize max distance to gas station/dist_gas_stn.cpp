@@ -48,10 +48,14 @@ public double minmaxGasDist(int[] stations, int k) {
     // get the minimum stations count at max distance 'dist'
     private int checkStations(int[] stations, double dist) {
         int count = 0;
-        for (int i = 1; i < stations.length; i++) {
-            count += (int) ((stations[i] - stations[i - 1]) / dist);
-            // for example, 10 / 3, at least put 3 stations
-            // to satisfy the condition: max distance is 'dist'
+        for(int i=0;i<arr.size()-1;i++){
+            int diff = arr[i+1]-arr[i];
+            if(diff <= target) continue;
+            k_count += diff/target;  // 1 2 3 4 5   -- diff here is 4. assume tgt is 2. 4/2 - place 2 which is incorrect. So if a%b == 0, reduce by 1.
+                //since target is a double not as straihtforward to use the mod operation. Hence, find the quotient, multiply with target and check if we get diff
+                //only then will diff be perfectly divisible by target.
+            int quotient = diff/target;
+            if(quotient*target == diff) k_count--;
         }
         return count;
     }
