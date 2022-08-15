@@ -103,3 +103,28 @@ public:
         return res == INT_MAX ? -1 : res;
     }
 };
+
+
+
+
+//most optimal: sliding window:
+//intuition: find the greatest window size in the middle whose sum = (total_sum_in_array - target)
+
+
+int minOperations(vector<int>& nums, int x) {
+        int res = -1, target = 0, n = nums.size();
+        for(int val : nums) target += val;
+        target -= x;
+        if(target < 0) return -1;
+        int left = 0, sum = 0;
+        for(int right = 0; right<n; right++){
+            sum += nums[right];
+            while(left<=right and sum>target){
+                sum -= nums[left++];
+            }
+            if(sum == target){
+                res = max(res, right-left+1);
+            }
+        }
+        return (res == -1 ? -1 : n-res);
+    }
