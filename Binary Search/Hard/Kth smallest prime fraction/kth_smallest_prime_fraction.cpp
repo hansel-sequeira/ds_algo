@@ -22,51 +22,40 @@ Output: [1,7]
 */
 
 
-int count(vector<int>& arr, double target){
-        int low = 0, res = 0, n = arr.size();
-        for(int i=0;i<n;i++){
-            while(low<n and (double)arr[i]/(double)arr[low]>target)
-                low++;
-            res += (n-low);
+
+//basic concept here is: [1 2   3   5   7   9]
+    //assume we're fixated at 5 and we've a tgt.
+    //assume 1/5,  2/5,  3/5   are all <= tgt.
+    //now when we're fixated at 7. No need to check for 1/7, 2/7 .. <= tgt. It is obvious!
+    //So just compare from the previous point where we left (5 onwards). TC: O(n)
+    
+    //now for the vals of num and den: we need the greatest fraction possible. So whenever we hit a particular
+    //a[i] and a[j] val which is the greates, update the num and den.
+    
+    vector<int> helper(vector<int>& arr, double target){
+        int count = 0, i = 0, n = arr.size();
+        int num = arr[0], den = arr[n-1];
+        for(int j=1; j<n; j++){
+            while(arr[i] <= target*arr[j]){
+                if(arr[i]*den > num*arr[j]){
+                    num = arr[i], den = arr[j];
+                }
+                i++;
+            }
+            count += i;
         }
-        return res;
+        return {count, num, den};
     }
     
     vector<int> kthSmallestPrimeFraction(vector<int>& arr, int k) {
-        double low = INT_MAX, high = INT_MIN, n = arr.size();
-        for(int i=0;i<n-1;i++){
-            low = min(low, (double)arr[i]/arr[n-1]);
-            high = max(high, (double)arr[i]/arr[i+1]);
-        }
-        while(high-low>1e-10){
+        int n = arr.size();
+        double low = arr[0]/arr[n-1], high = 1;
+        while(low<high){    //no point in having (high-low) > eps because it's a guarantee k exists
             double mid = low+(high-low)/2.0;
-            if(count(arr, mid) >= k){
-                high = mid;
-            }
-            else low = mid;
+            vector<int> val = helper(arr, mid);
+            if(val[0] < k) low = mid;
+            else if(val[0] > k) high = mid;
+            else return {val[1], val[2]};
         }
-        
-      
-        int a = -1, b = -1;
-        for(int i=0;i<n;i++){
-            float val = arr[i]/low;
-            if(floor(val) == ceil(val)){
-                a = arr[i];
-                b = val;
-                if(!binary_search(arr.begin(), arr.end(), b)) continue;
-                return {a,b};
-            }
-        }
-        return {-1,-1};
+        return {};
     }
-
-
-
-// (1/2)   (1/3)   (1/5)   (2/3)   (2/5)   (3/5)
-
-//     a/mid = b; //for this condtn to hold, a has to be greater than mid.
-//     //iterate for each a. If a is greater than m. check for the b. both a and b should be integers/
-    
-    
-//     1/3, if it works for 3, it works for all elts to the right
-//     2/3, it might not work. So keep extending to the right until it works.
