@@ -49,3 +49,57 @@ public:
         return isPossible(nums, 0, nums.size()-1, x);
     }
 };
+
+
+
+
+
+
+//better solution : nlogn (best case using map) and n (using unordered map)
+//sc: O(n)
+
+class Solution {
+private:
+    map<int,int> left, right;
+    
+public:
+    
+    int minOperations(vector<int>& arr, int x) {
+        int n = arr.size(), res = INT_MAX, lsum = 0, rsum = 0;
+        for(int i=0;i<n;i++){
+            lsum += arr[i];
+            rsum += arr[n-i-1];
+            left[lsum] = i;
+            right[rsum] = (n-i-1);
+        }
+        //first check while going from right to left:
+        int target = x;
+        for(int i=n-1;i>=0;i--){
+            if(arr[i] > target) break;
+            target -= arr[i];
+            if(target == 0){
+                res = min(res, n-i);
+                break;
+            }
+            if(left.find(target) != left.end() and left[target] < i){
+                res = min(res, left[target]+1+n-i);
+            }
+        }        
+        
+        //now check while going from left to right:
+        target = x;
+        for(int i=0;i<n;i++){
+            if(arr[i] > target) break;
+            target -= arr[i];
+            if(target == 0){
+                res = min(res, i+1);
+                break;
+            }
+            if(right.find(target) != right.end() and right[target]>i){
+                res = min(res, i+1+n-right[target]);
+            }
+        }
+        
+        return res == INT_MAX ? -1 : res;
+    }
+};
