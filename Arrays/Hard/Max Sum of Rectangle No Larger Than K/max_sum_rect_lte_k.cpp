@@ -35,6 +35,29 @@ int maxSumSubmatrix(vector<vector<int>>& matrix, int k) {
         return result;
     }
 
-
+ int maxSumSubmatrix(vector<vector<int>>& matrix, int k) {
+        int rows = matrix.size(), cols = matrix[0].size(), result = INT_MIN;
+        for(int left=0;left<cols;left++){
+            vector<int> dp(rows, 0);
+            for(int right = left; right<cols; right++){
+                
+                for(int i=0;i<rows;i++)
+                    dp[i] += matrix[i][right];
+                
+                //now basically at this point find the largest sum in the dp subarray <= k
+                set<int> s;
+                s.insert(0);
+                int sum = 0;
+                for(int i=0;i<rows;i++){
+                    sum += dp[i];
+                    int target = sum - k;
+                    auto it = s.lower_bound(target);
+                    if(it != s.end()) result = max(result, sum - *it);
+                    s.insert(sum);
+                }
+            }
+        }
+        return result;
+    }
 
 //optimal:   cols*cols*(rows + row*log(row))  --> cols*cols*rows*log(rows)
