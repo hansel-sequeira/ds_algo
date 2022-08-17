@@ -76,5 +76,9 @@ bool isPossible(vector<vector<int>>& cells, int rows, int cols, int days){
     }
 
 
-//tc: log(cells.size)*(cell.size + rows*cols)
+/*ime: O(row*col * log(row*col)), where row * col <= 2*10^4 is length of the grid.
+Binary search in range [1...row*col] take log(row*col).
+Each binary search, we need to bfs in the grid to check if it's good or not, bfs takes O(E+V), where E=4*V (because each cells have up to 4 neighbors), 
+so time complexity is O(E+V) = O(4V+V) = O(5V) ~ O(row*col).So total time complexity is O(row*col * log(row*col))
+Space: O(row*col)*/
 //observation: in order to find out if you can reach from src to dest and there are obstacles, can use bfs.
