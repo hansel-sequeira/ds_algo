@@ -74,3 +74,7 @@ bool isPossible(vector<vector<int>>& cells, int rows, int cols, int days){
         }
         return result;
     }
+
+
+//tc: log(cells.size)*(cell.size + rows*cols)
+//observation: in order to find out if you can reach from src to dest and there are obstacles, can use bfs.
