@@ -35,7 +35,7 @@ Constraints:
 pattern consists of only the letters 'I' and 'D'.
 */
 
-
+//TC: O(9!)
 
 string recursive(string pattern, int idx, vector<int>& arr, int previous, string str_so_far){
         char target = pattern[idx];
@@ -75,4 +75,22 @@ string recursive(string pattern, int idx, vector<int>& arr, int previous, string
             arr[i] = i+1;
         }
         return res;
+    }
+
+
+//stack based: O(n) soln:
+
+string smallestNumber(string pattern) {
+        stack<int> s;
+        string result;
+        for(int i=0;i<=pattern.size();i++){
+            s.push(i+1);
+            if(pattern[i] == 'I' or i == pattern.size()) {
+                while(!s.empty()){
+                    result += to_string(s.top());
+                    s.pop();
+                }
+            }
+        }
+        return result;
     }
