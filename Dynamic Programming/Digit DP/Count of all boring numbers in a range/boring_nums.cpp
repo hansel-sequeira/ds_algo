@@ -31,3 +31,11 @@ int recursive(string& right, int dig, bool isEven, bool isLeading, bool tight){
        return ans;
   }
 }
+
+//don't forget to memoize the above!
+
+//call to the function would then be:
+int left, right;
+left--;
+//to_string() left and right
+recursive(right, right.size(), false, true, true) - recursive(left, left.size(), false, true, true);
