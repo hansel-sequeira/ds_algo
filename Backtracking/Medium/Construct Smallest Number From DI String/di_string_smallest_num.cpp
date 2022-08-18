@@ -94,3 +94,20 @@ string smallestNumber(string pattern) {
         }
         return result;
     }
+
+//more intuitive greedy soln:
+string smallestNumber(string pattern) {
+        string result;
+        for(int i=1;i<=pattern.size()+1;i++){
+            result += to_string(i);
+        }
+        for(int i=0;i<pattern.size();i++){
+            if(pattern[i] == 'I') continue;
+            int j = i;
+            while(j<pattern.size() and pattern[j] == 'D')
+                j++;
+            reverse(result.begin()+i, result.begin()+j+1);
+            i = j;
+        }
+        return result;
+    }
