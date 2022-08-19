@@ -69,3 +69,5 @@ public:
         return n - countSpecialNumbers(n);
     }
 };
+
+//TC: O(log(r)) log r (base 10) = n which is the number of digits
