@@ -1,37 +1,36 @@
-/*
-We call a positive integer special if all of its digits are distinct.
-
-Given a positive integer n, return the number of special integers that belong to the interval [1, n].
+/*Given an integer n, return the number of positive integers in the range [1, n] that have at least one repeated digit.
 
  
 
 Example 1:
 
 Input: n = 20
-Output: 19
-Explanation: All the integers from 1 to 20, except 11, are special. Thus, there are 19 special integers.
+Output: 1
+Explanation: The only positive number (<= 20) with at least 1 repeated digit is 11.
 Example 2:
 
-Input: n = 5
-Output: 5
-Explanation: All the integers from 1 to 5 are special.
+Input: n = 100
+Output: 10
+Explanation: The positive numbers (<= 100) with atleast 1 repeated digit are 11, 22, 33, 44, 55, 66, 77, 88, 99, and 100.
 Example 3:
 
-Input: n = 135
-Output: 110
-Explanation: There are 110 integers from 1 to 135 that are special.
-Some of the integers that are not special are: 22, 114, and 131.
+Input: n = 1000
+Output: 262
  
 
 Constraints:
 
-1 <= n <= 2 * 109
+1 <= n <= 10^9
+
+
 */
 
-
-int dp[11][2][1024];
+class Solution {
+public:
+    
+    int dp[11][2][1024];
     //why 11? n<=2*10^9 which is 10 digits
-    //why 1024 for max mask value? considering we've 10 digits, max bitmask is 1111111111 which equat 
+    //why 1024 for max mask value? considering we've 10 digits, max bitmask is 1111111111 which equates to 1023
     
     int recursive(string& right, int n, bool tight, int mask){
         if(n == 0) {
@@ -65,3 +64,8 @@ int dp[11][2][1024];
         memset(dp, -1, sizeof(dp));
         return recursive(right, right.size(), true, 0);
     }
+    
+    int numDupDigitsAtMostN(int n) {
+        return n - countSpecialNumbers(n);
+    }
+};
