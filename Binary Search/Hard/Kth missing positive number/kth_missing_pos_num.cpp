@@ -42,3 +42,20 @@ int findKthPositive(vector<int>& arr, int k) {
         //return arr[low] - (arr[low]-low-1   -    k + 1);
         return low+k;
     }
+
+
+
+//even more succinct code:
+int findKthPositive(vector<int>& arr, int k) {
+        int n = arr.size();
+        if(k > arr[n-1]-n) return k + n;
+        if(k <= arr[0]-1) return k;
+        int low = 0, high = n-1;
+        while(low<high){
+            int mid = low+(high-low)/2;
+            int missing_upto_me = arr[mid]-mid-1;
+            if(missing_upto_me >= k) high = mid;
+            else low = mid+1;
+        }
+        return low+k;
+    }
