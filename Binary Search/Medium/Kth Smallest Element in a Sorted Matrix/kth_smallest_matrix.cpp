@@ -34,8 +34,8 @@ int count(vector<vector<int>>& matrix, int target){
         //if mid is 5, will our code work? Yes.
    
         while(low<=high){
-            int mid = low+(high-low)/2;
-            if(count(matrix, mid) >= k){
+            int mid = low+(high-low)/2;  
+            if(count(matrix, mid) >= k){   //careful here: do NOT immediately return if count==k. Why? That elt might not exist in the matrix!
                 res = mid;
                 high = mid-1;
             } else low = mid+1;
