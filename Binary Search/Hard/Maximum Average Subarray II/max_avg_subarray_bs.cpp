@@ -23,6 +23,11 @@ Output:
 5.000
 */
 
+
+//why BS to beginw with? a naive way would be n^2. Since we're not a given a specific target to find, instead to find a "max possible" -> it is an optimization
+//problem and hence can only be solved in nlogn.
+
+
 //suboptimal isPossible(): n^2
 bool isPossible(vector<int>& arr, double target, int k){
         int n = arr.size();
