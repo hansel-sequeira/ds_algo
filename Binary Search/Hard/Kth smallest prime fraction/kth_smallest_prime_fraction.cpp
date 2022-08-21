@@ -33,16 +33,16 @@ Output: [1,7]
     //a[i] and a[j] val which is the greates, update the num and den.
     
     vector<int> helper(vector<int>& arr, double target){
-        int count = 0, i = 0, n = arr.size();
+        int count = 0, j = 1, n = arr.size();
         int num = arr[0], den = arr[n-1];
-        for(int j=1; j<n; j++){
-            while(arr[i] <= target*arr[j]){
-                if(arr[i]*den > num*arr[j]){
-                    num = arr[i], den = arr[j];
-                }
-                i++;
+        for(int i=0;i<n-1;i++){
+            while(j<n and arr[i] > target*arr[j])
+                j++;
+            count += (n-j);
+            if(j!=n and arr[i]*den > arr[j]*num){
+                num = arr[i];
+                den = arr[j];
             }
-            count += i;
         }
         return {count, num, den};
     }
