@@ -54,7 +54,7 @@ Output: [1,7]
             double mid = low+(high-low)/2.0;
             vector<int> val = helper(arr, mid);
             if(val[0] < k) low = mid;
-            else if(val[0] > k) high = mid;
+            else if(val[0] > k) high = mid; //be very careful with this condn. Since numbers are prime (unique), don't do: val[0] >= k!!!
             else return {val[1], val[2]};
         }
         return {};
