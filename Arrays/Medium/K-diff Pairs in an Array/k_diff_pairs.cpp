@@ -62,6 +62,29 @@ public:
 };
 
 
+//optimized O(N) solution:
+
+class Solution {
+public:
+    int findPairs(vector<int>& nums, int k) {
+        int res = 0;
+        unordered_map<int,int> m;
+        for(int x: nums)
+            m[x]++;
+        for(auto it: m){
+            int x = it.first;
+            if((k==0 && m[x]>1) ||  ((k>0 || k<0) && m.find(x-k)!=m.end()))
+                res++;
+        }
+        return res;
+    }
+};
+
+
+
+   
+    
+
 
    
     
