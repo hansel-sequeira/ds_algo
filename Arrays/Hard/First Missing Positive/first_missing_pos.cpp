@@ -33,7 +33,8 @@ public:
         for(int i=0;i<nums.size();i++){
             int idx = abs(nums[i])-1;
             if(idx >= 0 and idx < nums.size()){
-                nums[idx] = (nums[idx] == 0) ? -(nums.size()+2) : ((nums[idx]<0) ? nums[idx] : -nums[idx]);
+               if(nums[idx] < 0) continue; //if num already there, skip
+                nums[idx] = (nums[idx] == 0) ? -(nums.size()+2) : -nums[idx];
             }
         }
         for(int i=0;i<nums.size();i++){
