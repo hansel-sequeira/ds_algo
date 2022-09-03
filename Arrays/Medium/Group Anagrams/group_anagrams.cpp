@@ -26,6 +26,9 @@ Constraints:
 strs[i] consists of lowercase English letters.
 */
 
+
+//tc average: n*(m*logm)
+//tc worst: n^2*m*logm
 class Solution {
 public:
     vector<vector<string>> groupAnagrams(vector<string>& strs) {
@@ -36,6 +39,29 @@ public:
             string temp = str;
             sort(temp.begin(),temp.end());
             umap[temp].push_back(str);
+        }
+        for(auto it: umap){
+           res.push_back(it.second);
+        }
+        return res;
+    }
+};
+
+
+
+
+//tc: n*m*log(n) where n is the length
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+        int n = strs.size();
+        vector<vector<string>> res;
+        map<vector<int>, vector<string>> umap;
+        for(string str: strs){
+            vector<int> count(26, 0);
+            for(char ch: str)
+                count[ch-'a']++;
+            umap[count].push_back(str);
         }
         for(auto it: umap){
            res.push_back(it.second);
