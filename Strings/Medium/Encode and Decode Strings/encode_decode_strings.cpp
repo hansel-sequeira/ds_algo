@@ -52,3 +52,46 @@ public:
         return result;
     }
 };
+
+
+//optimal solution:
+
+//intuition:  lint code loves
+//encode to 4#lint4#code...
+//why use #? what if number was 2+ digits?
+
+class Solution {
+public:
+    /*
+     * @param strs: a list of strings
+     * @return: encodes a list of strings to a single string.
+     */
+    string encode(vector<string> &strs) {
+        // write your code here
+        string result;
+        for(string str: strs){
+            result += to_string(str.length())+"#"+str;
+        }
+        return result;
+    }
+
+    /*
+     * @param str: A string
+     * @return: dcodes a single string to a list of strings
+     */
+    vector<string> decode(string &str) {
+        // write your code here
+        vector<string> result;
+        int i = 0;
+        while(i<str.length()){
+            //first extract the length
+            string length;
+            while(str[i]!='#')
+                length += str[i++];
+            int len = stoi(length);
+            result.push_back(str.substr(i+1, len));
+            i += len+1;
+        }
+        return result;
+    }
+};
