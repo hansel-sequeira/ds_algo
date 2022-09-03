@@ -48,3 +48,31 @@ public:
         return res;
     }
 };
+
+
+//optimal soln:
+
+class Solution {
+public:
+    
+    vector<int> res;
+    
+    void recursive(int num, int n, int k){
+        if(n == 0){
+            res.push_back(num);
+            return;
+        }
+        int last_dig = num%10;
+        if(last_dig+k<=9)
+            recursive(num*10+(last_dig+k), n-1, k);
+        if(k!=0 and last_dig-k>=0) //don't forget to check k!=0. Why?
+            recursive(num*10+(last_dig-k), n-1, k);
+    }
+    
+    vector<int> numsSameConsecDiff(int n, int k) {
+        for(int i=1;i<=9;i++){
+            recursive(i, n-1, k);
+        }
+        return res;
+    }
+};
