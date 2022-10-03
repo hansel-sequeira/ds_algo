@@ -24,25 +24,27 @@ using namespace std;
 
 void print(vector<int>& arr){
   int n = arr.size(), sum = arr[0], res = arr[0];
-  int start_window = 0;
+  int idx = 0;
+  vector<int> vals;
   for(int i=1;i<n;i++){
-    if(arr[i] > arr[i] + sum){
-        start_window = i;
-        sum = arr[i];
-    } else {
-        sum += arr[i];
-     }
-      res = max(res, sum);
+    sum = max(sum+arr[i], arr[i]);
+    if(res < sum){
+        res = sum;
+        idx = i;
+    } 
   }
-  sum = 0;
-  while(sum!=res){
-    cout<<arr[start_window]<<" ";
-    sum += arr[start_window++];
-  }
+  
+  while(res!=0){
+    	vals.push_back(arr[idx]);
+    	res -= arr[idx--];
+    }
+  for(int x: vals)
+    cout<<x<<" ";
+
 }
 
 int main() {
-        vector<int> arr = {-2, -5, 6, -2, -3, 1, 5, -6};
+        vector<int> arr = {-2, -3, 4, -1, -2, 1, 5, -3};
         print(arr);
         return 0;
 }
