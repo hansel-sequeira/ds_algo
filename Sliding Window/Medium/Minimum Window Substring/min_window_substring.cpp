@@ -81,3 +81,37 @@ public:
         return result;
     }
 };
+
+
+
+
+//Even more elegant solution:
+
+class Solution {
+public:
+    string minWindow(string s, string t) {
+        string result = "";
+        unordered_map<char,int> countS, countT;
+        for(char ch: t)
+            countT[ch]++;
+        int required = countT.size();
+        int p = 0, q = 0;
+        while(q<s.size()){
+            char ch = s[q];
+            countS[ch]++;
+            if(countT.find(ch)!=countT.end() and countS[ch] == countT[ch])
+                required--;
+            while(required == 0){
+                if(result=="" or result.size()>(q-p+1)){
+                    result = s.substr(p, q-p+1);
+                }
+                --countS[s[p]];
+                if(countT.find(s[p])!=countT.end() and countS[s[p]] < countT[s[p]])
+                    required++;
+                p++;
+            }
+            q++;
+        }
+        return result; 
+    }
+};
