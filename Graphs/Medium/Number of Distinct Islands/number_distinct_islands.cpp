@@ -38,6 +38,16 @@ We have 4 islands, but 2 of them
 are equal, So we have 3 distinct islands.
 */
 
+
+//Most important point in this ques deals with storing the path in the set. Why not simple store the path as a string?
+//dfs path can be same for islands which do not have same orientation. Eg:
+// 1 1
+// 1 0   with a path of: " RD"
+//and 
+// 1 1 
+// 0 1 with a path of: " RD".
+//Hence we take care of this situation using the coordinates: [(0,0), (0,1), (1,0)] and [(0,0), (0,1), (1,1)]
+
 class Solution {
   private:
   
