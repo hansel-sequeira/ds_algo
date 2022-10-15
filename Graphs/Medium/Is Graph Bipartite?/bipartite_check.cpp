@@ -36,6 +36,10 @@ All the values of graph[u] are unique.
 If graph[u] contains v, then graph[v] contains u.
 */
 
+
+//Odd length cycle check
+//Number of nodes in set U and set V where nodes in same set have no direct edge wrt each other
+
 class Solution {
     
 private:
