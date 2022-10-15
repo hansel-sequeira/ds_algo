@@ -1,5 +1,10 @@
 //DFS:
 
+//what is the logic behind pushing the node in the stack before exiting the recursive call?
+//assuming the ordering was as such:     3 -> 1 -> 0 -> 2 -> 4
+//and the call started with 0. If we pushed first, then the ordering would be: 0,2,4,1,3 which is wrong. What we need to ensure is that regardless of the position
+//of the node, all the elements below it and itself are properly arranged. So for 0:  0 2 4 and finally: 3 1 0 2 4
+
 void dfs(int u, vector<bool>&  vis, vector<int>& res, vector<int> adj[]){
 	    vis[u] = true;
 	    for(int x: adj[u]){
