@@ -37,6 +37,28 @@ The number of edges in the graph will be in the range [1, 4 * 104].
 class Solution {
     
 private:
+ 
+  /* BRUTE FORCE DFS: (INEFFICIENT)
+  void dfs(int u, vector<bool>& vis, vector<bool>& stack, vector<bool>& terminal, vector<vector<int>>& adj){
+        int n = adj.size();
+        vis[u] = true;
+        stack[u] = true;
+        for(int v: adj[u]){
+            if(vis[v] and (stack[v] or !terminal[v]) ){
+                //invalidate all the nodes part of this cycle
+                for(int i=0;i<n;i++){
+                    if(stack[i])
+                        terminal[i] = false;
+                }
+            } else if(!vis[v]){
+                dfs(v, vis, stack, terminal, adj);
+            }
+        }
+        stack[u] = false;
+    }
+   */
+  
+ 
     bool dfs(int u, vector<bool>& vis, vector<bool>& stack, vector<bool>& terminal, vector<vector<int>>& adj){
         vis[u] = stack[u] = true;
         for(int v: adj[u]){
