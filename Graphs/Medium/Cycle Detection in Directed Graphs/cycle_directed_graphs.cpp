@@ -29,3 +29,40 @@ bool dfs(int u, vector<int> adj[], vector<bool>& vis, vector<bool>& recursive_st
         }
         return false;
     }
+
+
+
+//BFS (Using Kahn's algorithm for topological sorting)
+
+bool isCyclic(int V, vector<int> adj[]) {
+        // code here
+        vector<int> indegree(V, 0);
+        vector<bool> vis(V, false);
+        queue<int> q;
+        for(int i=0;i<V;i++){
+            for(int j: adj[i])
+                indegree[j]++;
+        }
+        
+        for(int i=0;i<V;i++){
+            if(indegree[i]==0)
+                q.push(i);
+        }
+        
+        while(!q.empty()){
+            int u = q.front();
+            q.pop();
+            for(int v: adj[u]){
+                if(!vis[v] and --indegree[v]==0){
+                    vis[v] = true;
+                    q.push(v);
+                }
+            }
+        }
+        
+        for(int i=0;i<V;i++){
+            if(indegree[i] != 0)
+                return true;
+        }
+        return false;
+    }
