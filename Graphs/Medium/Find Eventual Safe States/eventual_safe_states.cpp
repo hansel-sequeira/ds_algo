@@ -34,6 +34,8 @@ The graph may contain self-loops.
 The number of edges in the graph will be in the range [1, 4 * 104].
 */
 
+//DFS
+
 class Solution {
     
 private:
@@ -96,3 +98,52 @@ public:
         return res;
     }
 };
+
+
+
+//BFS
+/*
+Property of a terminal node? outdegree is 0. If we reverse the graph, the indegree of all terminal nodes becomes 0.
+we can start with a trivial case of all terminal nodes in a queue and perform a topo sort on its neighboring edges. any edge which is the start 
+*/
+
+vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+        int n = graph.size();
+        vector<bool> vis(n, false);
+        vector<bool> safe(n, true);
+        vector<int> indegree(n, 0);
+        queue<int> q;
+        
+        //creating the reverse graph
+        vector<int> adj[n];
+        for(int i=0;i<n;i++){
+            for(int j: graph[i]){
+                adj[j].push_back(i);
+                indegree[i]++;
+            }
+        }
+        
+        for(int i=0;i<n;i++){
+            if(indegree[i]==0){
+                q.push(i);
+                vis[i] = true;
+            }
+        }
+        
+        vector<int> res;
+        while(!q.empty()){
+            int u = q.front();
+            q.pop();
+            res.push_back(u);
+            for(int v: adj[u]){
+                if(!vis[v] and --indegree[v]==0){
+                    vis[v] = true;
+                    q.push(v);
+                }
+            }
+        }
+        
+        sort(res.begin(), res.end());
+        return res;
+    }
+
