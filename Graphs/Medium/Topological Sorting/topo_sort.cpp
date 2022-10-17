@@ -27,3 +27,39 @@ void dfs(int u, vector<bool>&  vis, vector<int>& res, vector<int> adj[]){
 	    reverse(res.begin(), res.end());
 	    return res;
 	}
+
+
+
+//BFS (Kahn's Algorithm)
+
+vector<int> topoSort(int V, vector<int> adj[]) 
+	{
+	    // code here
+	    vector<bool> vis(V, false);
+	    vector<int> indeg(V, 0);
+	    vector<int> res;
+	    queue<int> q;
+	    for(int i=0;i<V;i++){
+	        for(int x: adj[i])
+	            indeg[x]++;
+	    }
+	    for(int i=0;i<V;i++){
+	        if(indeg[i] == 0)
+	            q.push(i);
+	    }
+	    
+	    while(!q.empty()){
+	        int u = q.front();
+	        q.pop();
+	        res.push_back(u);
+	        vis[u] = true;
+	        for(int v: adj[u]){
+	            if(!vis[v] and --indeg[v]==0){
+	                vis[v] = true;
+	                q.push(v);
+	            }
+	        }
+	    }
+	    
+	    return res;
+	}
