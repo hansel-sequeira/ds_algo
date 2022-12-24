@@ -60,3 +60,79 @@ public:
         return result;
     }
 };
+
+
+
+
+//Optimal solution:
+
+class Solution {
+private:
+    string startWord;
+    unordered_map<string,int> umap;
+public:
+
+    void dfs(string word, vector<string>& interim, vector<vector<string>>& result){
+        if(word == startWord){
+            reverse(interim.begin(), interim.end());
+            result.push_back(interim);
+            reverse(interim.begin(), interim.end());
+            return;
+        }
+        int steps = umap[word];
+        for(int i=0;i<word.length();i++){
+            for(int j=0;j<26;j++){
+                //going up the path
+                char ch = word[i];
+                word[i] = j+'a';
+                if(umap.find(word) != umap.end() and umap[word]==steps-1){
+                    interim.push_back(word);
+                    dfs(word, interim, result);
+                    interim.pop_back();
+                }
+                word[i] = ch;
+            }
+        }
+    }
+
+    vector<vector<string>> findLadders(string beginWord, string endWord, vector<string>& wordList) {
+        this->startWord = beginWord;
+        vector<vector<string>> result;
+        unordered_set<string> uset(wordList.begin(), wordList.end());
+        queue<string> q;
+        q.push(beginWord);
+        umap[beginWord] = 1;
+        uset.erase(beginWord);
+        while(!q.empty()){
+            string str = q.front();
+            q.pop();
+
+            if(str == endWord)
+                break;
+
+            int len = str.length();
+            int steps = umap[str];
+            for(int i=0;i<len;i++){
+                for(int j=0;j<26;j++){
+                    char ch = str[i];
+                    str[i] = j+'a';
+                    if(uset.find(str) != uset.end()){
+                        q.push(str);
+                        umap[str] = steps + 1;
+                        uset.erase(str);
+                    }
+                    str[i] = ch;
+                }
+            }
+
+        }
+
+        if(umap.find(endWord) != umap.end()){
+            vector<string> interim;
+            interim.push_back(endWord);
+            dfs(endWord, interim, result);
+        }
+        return result;
+    }
+};     
+
