@@ -12,6 +12,7 @@ such sequence exists. Each sequence should be returned as a list of the words [b
 //correct but slightly suboptimal approach (won't pass a few testcases)
 /*
 TC analysis:
+assuming a binary tree (bat -> hat and bit)
 levels of the binary tree = N (N is total words)
 Therefore, total nodes being probed = 2^N - 1 - we're assuming each node will be a vector with just a single string
 So, at the worst case, the TC is exponential
