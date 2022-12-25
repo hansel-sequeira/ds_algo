@@ -1,4 +1,6 @@
-//tc: e*log(v)
+//Comparison b/w PQ and set : 
+//Incase of PQ, the maximum heap size can go upto E = number of edges, leading to complexity = O(E*logE).
+//Incase of set, the maximum set size can go upto V =. number of vertices, leading to complexity = O(E*logV).
 //Using a pq:
 public:
 	//Function to find the shortest distance of all the vertices
