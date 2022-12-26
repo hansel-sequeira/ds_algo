@@ -8,6 +8,8 @@ A route's effort is the maximum absolute difference in heights between two conse
 Return the minimum effort required to travel from the top-left cell to the bottom-right cell.
 */
 
+//tc: n*m*log(n*m) => edges: (n*m*4) and v = n*m
+
 int minimumEffortPath(vector<vector<int>>& heights) {
         int rows = heights.size(), cols = heights[0].size();
         vector<vector<int>> dist(rows, vector<int>(cols, INT_MAX));
